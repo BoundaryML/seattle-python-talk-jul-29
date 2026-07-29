@@ -1,0 +1,9 @@
+import { Notes, SectionSlide } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "Runtime", eyebrow: "Section 03", kind: "section", tone: "purple" };
+
+<SectionSlide title="Runtime" label="Section 03" />
+
+<Notes>
+  Bytes go in, bytes come out. Python value → baml_inbound.proto → bex_vm::call_function → baml_outbound.proto → Python value.
+</Notes>

@@ -1,0 +1,23 @@
+import { HandleReveal, Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "A Python callable as a protobuf handle", eyebrow: "Identity by indirection", kind: "content", tone: "ink" };
+
+<SlideFrame title="A Python callable as a protobuf handle" eyebrow="Identity by indirection" dense>
+  <HandleReveal />
+
+  ```textproto
+  InboundMapEntry {
+    string_key: "send_update"
+    value {
+      handle {
+        key: 42
+        handle_type: HOST_VALUE_CALLABLE
+      }
+    }
+  }
+  ```
+</SlideFrame>
+
+<Notes>
+  The Python encoder calls `register_host_callable(send_update)`. The registry keeps a strong reference to the lambda and returns illustrative key `42`. Only the integer and handle kind cross the boundary. `delete_callback` follows the same path with a different key.
+</Notes>

@@ -1,0 +1,25 @@
+import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "The barrel function", eyebrow: "Generated Python", kind: "content", tone: "paper" };
+
+<SlideFrame title="The barrel function" eyebrow="Generated Python">
+  ```python
+  def _sync(*args: Any, **kwargs: Any) -> Any:
+      merged = _build_kwargs(args, kwargs, required_names, optional_names)
+      type_args = <snip>
+      rt = get_runtime()
+      call_id = new_function_call()
+      args_proto = encode_call_args(
+          merged,
+          call_id,
+          type_args,
+          function_name=baml_fqn,
+      )
+      result_bytes = rt.call_function_sync(args_proto)
+      return decode_call_result(result_bytes)
+  ```
+</SlideFrame>
+
+<Notes>
+  This is the generated wrapper's small center of gravity. Bind arguments, encode one call, invoke the runtime, decode one result.
+</Notes>

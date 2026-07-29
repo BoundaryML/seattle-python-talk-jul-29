@@ -1,0 +1,38 @@
+import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "How do we do this?", eyebrow: "BAML signature → Python stub", kind: "content", tone: "paper" };
+
+<SlideFrame title="How do we do this?" eyebrow="BAML signature → Python stub" dense>
+  <div className="signature-compare">
+    <div>
+      <span>BAML</span>
+
+      ```baml
+      function respond(
+        message: DiscordMessage,
+        delete_callback: () -> null throws never,
+        send_update: (string) -> null throws never
+      ) -> string
+      ```
+    </div>
+    <div>
+      <span>baml_sdk/__init__.pyi</span>
+
+      ```python
+      def respond(
+          message: DiscordMessage,
+          delete_callback: Callable[[], None],
+          send_update: Callable[[str], None],
+      ) -> str:
+          """Raises: DevOther, InvalidArgument,
+          Io, LlmClient, RenderPrompt, Timeout"""
+      ```
+    </div>
+  </div>
+
+  <p className="lead">Every BAML type needs a corresponding Python type.</p>
+</SlideFrame>
+
+<Notes>
+  The outline leaves this as a revision point: “we need to make decisions about…” Use this slide to compare the source signature with the generated Python surface while that part of the talk is still taking shape.
+</Notes>

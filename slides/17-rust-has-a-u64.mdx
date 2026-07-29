@@ -1,0 +1,17 @@
+import { Notes, RuntimeFlow, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "Rust has a u64. Now what?", eyebrow: "The host-call trampoline", kind: "content", tone: "paper" };
+
+<SlideFrame title="Rust has a u64. Now what?" eyebrow="The host-call trampoline" dense>
+  ```baml
+  send_update("Reading baml_language/")
+  ```
+
+  <RuntimeFlow />
+
+  <p>The VM sends key <code>42</code> and the serialized string through the host-call trampoline. Python retrieves and invokes the original lambda. Its return value crosses back through the same codecs in reverse.</p>
+</SlideFrame>
+
+<Notes>
+  The integer is the only representation of the lambda that crosses the FFI boundary. When the final `HostValueArc` is dropped, its release callback tells Python to remove key `42` from the registry. Cover how BAML invokes a host handle, the BAML → Python trampoline, reversed outbound/inbound codecs, and what happens if a callback throws.
+</Notes>

@@ -1,0 +1,21 @@
+import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "Back to the earlier respond call", eyebrow: "Two Python function objects", kind: "content", tone: "paper" };
+
+<SlideFrame title="Back to the earlier respond call" eyebrow="Two Python function objects">
+  The ordinary `DiscordMessage` value is already covered. Focus now on the two Python function objects:
+
+  ```python
+  response = baml_sdk.respond(
+      discord_message,  # serialized normally
+      lambda: tasks.append(loop.create_task(message.delete())),
+      lambda update: tasks.append(loop.create_task(thread.send(update))),
+  )
+  ```
+
+  <p className="lead">Keep the callable in Python. Serialize a reference to it.</p>
+</SlideFrame>
+
+<Notes>
+  The bridge cannot serialize a lambda's code, closure variables, Python interpreter state, or object identity. Instead, it keeps each callable in Python and serializes a reference.
+</Notes>

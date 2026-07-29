@@ -1,0 +1,21 @@
+import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "decode_call_result", eyebrow: "protobuf → Python", kind: "content", tone: "paper" };
+
+<SlideFrame title="decode_call_result" eyebrow="protobuf → Python">
+  The outbound encoder places that string in the success arm of the top-level result envelope:
+
+  ```textproto
+  BamlOutboundResult {
+    ok {
+      string_value: "Done! Slides have been attached to B-832"
+    }
+  }
+  ```
+
+  <div className="result-strip"><code>ok.string_value</code><span>→</span><b>Python str</b><span>→</span><code>response</code></div>
+</SlideFrame>
+
+<Notes>
+  The Python decoder reads `ok.string_value` and returns a Python `str`, which is the value assigned to `response`.
+</Notes>

@@ -1,0 +1,25 @@
+import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "Outbound BexExternalValue", eyebrow: "VM value → protobuf", kind: "content", tone: "paper" };
+
+<SlideFrame title="Outbound BexExternalValue" eyebrow="VM value → protobuf">
+  Suppose this run completes successfully:
+
+  ```text
+  Done! Slides have been attached to B-832
+  ```
+
+  At the engine-to-bridge boundary, the top-level return is:
+
+  ```rust
+  BexExternalValue::String(
+      "Done! Slides have been attached to B-832".into(),
+  )
+  ```
+
+  <p className="lead">This is the final return value from <code>respond</code>.</p>
+</SlideFrame>
+
+<Notes>
+  The inbound value was richly annotated because the VM needed to materialize a nominal class. The top-level outbound value in this example is just a string.
+</Notes>

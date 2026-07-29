@@ -1,0 +1,19 @@
+import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "Inbound BexExternalValue", eyebrow: "Handle → host closure", kind: "content", tone: "paper" };
+
+<SlideFrame title="Inbound BexExternalValue" eyebrow="Handle → host closure">
+  The Rust inbound decoder recognizes `HOST_VALUE_CALLABLE` and turns the handle into:
+
+  ```rust
+  BexExternalValue::HostValue(
+      HostValueArc::intern(42, HostValueKind::Callable),
+  )
+  ```
+
+  <div className="result-strip"><code>key: 42</code><span>→</span><b>stable identity</b><span>→</span><code>VM host closure</code></div>
+</SlideFrame>
+
+<Notes>
+  This special handle does not use the ordinary CFFI handle table. `HostValueArc::intern` preserves identity for the key, and contextual conversion against `(string) → null throws never` materializes a VM host closure.
+</Notes>

@@ -1,0 +1,35 @@
+import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "One concrete respond call", eyebrow: "Follow one value", kind: "content", tone: "paper" };
+
+<SlideFrame title="One concrete respond call" eyebrow="Follow one value" dense>
+  Inside the Discord bot, one invocation might have these concrete Python values:
+
+  ```baml
+  class DiscordMessage {
+      from_user: string,
+      content: string,
+  }
+
+  function respond(message: DiscordMessage, delete_callback: () -> null throws never, send_update: (string) -> null throws never) -> string {
+      // ...
+  }
+  ```
+
+  `baml generate` turns `DiscordMessage` into a Pydantic model and gives `respond` a type-checked Python signature:
+
+  ```python
+  response = baml_sdk.respond(
+      baml_sdk.DiscordMessage(
+          from_user="sam",
+          content="@bamlbot prepare the FFI talk slides. source code is in baml_language/",
+      ),
+      lambda: tasks.append(loop.create_task(message.delete())),
+      lambda update: tasks.append(loop.create_task(thread.send(update))),
+  )
+  ```
+</SlideFrame>
+
+<Notes>
+  The generated wrapper binds positional arguments to `message`, `delete_callback`, and `send_update`. For this first pass, follow only the generated `DiscordMessage` object into BAML and the returned string back into Python. Deliberately elide callbacks from the wire views.
+</Notes>

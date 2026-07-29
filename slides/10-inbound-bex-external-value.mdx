@@ -1,0 +1,33 @@
+import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "Inbound BexExternalValue", eyebrow: "protobuf → VM value", kind: "content", tone: "paper" };
+
+<SlideFrame title="Inbound BexExternalValue" eyebrow="protobuf → VM value" dense>
+  After protobuf decoding, `kwargs_to_bex_values` has a `HashMap<String, BexExternalValue>` conceptually equivalent to:
+
+  ```rust
+  HashMap::from([(
+      "message".to_string(),
+      BexExternalValue::typed(
+          BexExternalValue::Instance {
+              class_name: String::new(),
+              type_args: vec![],
+              fields: IndexMap::from([
+                  ("from_user".to_string(), BexExternalValue::String("sam".into())),
+                  ("content".to_string(), BexExternalValue::String(
+                      "@bamlbot prepare the FFI talk slides.".into()
+                  )),
+              ]),
+          },
+          RuntimeTy::class_with_args(
+              TypeName::from_dotted_path("user.DiscordMessage"),
+              vec![],
+          ),
+      ),
+  )])
+  ```
+</SlideFrame>
+
+<Notes>
+  `BexExternalValue::typed` is a transient inbound type-annotation wrapper: the protobuf payload provides the instance fields, while `value_type.class_ty` preserves the nominal class identity needed by contextual VM materialization.
+</Notes>
