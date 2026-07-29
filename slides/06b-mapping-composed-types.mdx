@@ -3,21 +3,19 @@ import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
 export const meta = { title: "We define rules for how to map items in BAML to Python", eyebrow: "Composed types", kind: "content", tone: "paper" };
 
 <SlideFrame title="We define rules for how to map items in BAML to Python" eyebrow="Composed types" dense>
-  BAML types should be relatively familiar:
+  <div className="mapping-slide-content">
+    BAML type _expressions_ need their own translation logic too.
 
-  - lists
-  - maps
-  - unions
-  - generics
-  - closures
+    ```baml
+    function respond(
+      original: Box<SlackMessage | DiscordMessage>[] | map<string, EmailMessage | LinkedInDm | TwitterDm>
+    ) { ... }
+    ```
 
-  This can get complicated. What is the corresponding Python type?
-
-  ```baml
-  Box<SlackMessage | DiscordMessage>[] | map<string, EmailMessage | LinkedInDm | TwitterDm>
-  ```
+    BAML types are the same as what you're used to: lists, maps, unions, etc.
+  </div>
 </SlideFrame>
 
 <Notes>
-  For any BAML type, define the corresponding Python type. The individual pieces—lists, maps, unions, generics, and closures—are familiar. Composition is where this gets complicated. Ask the room what Python type should correspond to the full expression on screen.
+  Individual BAML types are familiar; the bridge still needs deterministic translation logic for composed type expressions such as lists and maps containing unions of nominal types.
 </Notes>

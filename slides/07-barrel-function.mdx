@@ -1,8 +1,8 @@
 import { Notes, RuntimePathFooter, SlideFrame } from "@/components/deck/SlidePrimitives";
 
-export const meta = { title: "The barrel function", eyebrow: "Generated Python", kind: "content", tone: "paper" };
+export const meta = { title: "Bytes in, bytes out", eyebrow: "Generated Python", kind: "content", tone: "paper" };
 
-<SlideFrame title="The barrel function" eyebrow="Generated Python" footer={<RuntimePathFooter active="python-in" />}>
+<SlideFrame title="Bytes in, bytes out" eyebrow="Generated Python" footer={<RuntimePathFooter active="python-in" />}>
   ```python
   def _sync(*args: Any, **kwargs: Any) -> Any:
       merged = _build_kwargs(args, kwargs, required_names, optional_names)

@@ -7,12 +7,11 @@ export type SlideMeta = {
   tone?: "paper" | "ink" | "purple";
 };
 
-export function SlideFrame({ title, eyebrow, children, dense = false, footer }: { title: string; eyebrow: string; children: ReactNode; dense?: boolean; footer?: ReactNode }) {
+export function SlideFrame({ title, children, dense = false, footer }: { title: string; eyebrow?: string; children: ReactNode; dense?: boolean; footer?: ReactNode }) {
   const className = ["slide-frame", dense ? "is-dense" : "", footer ? "has-footer" : ""].filter(Boolean).join(" ");
   return (
     <div className={className}>
       <div className="slide-heading">
-        <p className="eyebrow">{eyebrow}</p>
         <h1>{title}</h1>
       </div>
       <div className="mdx-body">{children}</div>
@@ -33,21 +32,24 @@ export function RuntimePathFooter({ active }: { active: RuntimeStage }) {
   ];
 
   return (
-    <div className="runtime-path" aria-label="Python to baml_inbound.proto to BAML to baml_outbound.proto to Python">
+    <div className="runtime-path" aria-label="baml_sdk.respond(discord_message, ...) to Python to baml_inbound.proto to BAML to baml_outbound.proto to Python">
+      <span className="runtime-path-part">
+        <span className="runtime-path-stage">baml_sdk.respond(discord_message, ...)</span>
+        <span className="runtime-path-arrow" aria-hidden="true">→</span>
+      </span>
       {stages.map((stage, index) => (
         <span className="runtime-path-part" key={stage.id}>
           <span className={stage.id === active ? "runtime-path-stage active" : "runtime-path-stage"}>{stage.label}</span>
-          {index < stages.length - 1 && <span className="runtime-path-arrow" aria-hidden="true">-&gt;</span>}
+          {index < stages.length - 1 && <span className="runtime-path-arrow" aria-hidden="true">→</span>}
         </span>
       ))}
     </div>
   );
 }
 
-export function SectionSlide({ title, label }: { title: string; label: string }) {
+export function SectionSlide({ title }: { title: string; label?: string }) {
   return (
     <div className="section-slide">
-      <p className="eyebrow">{label}</p>
       <div className="section-index" aria-hidden="true">{`{ }`}</div>
       <h1>{title}</h1>
       <div className="section-rule"><span /></div>
@@ -59,7 +61,6 @@ export function TitleSlide({ title, accent, description }: { title: string; acce
   return (
     <div className="title-slide">
       <div className="title-mark" aria-hidden="true">B</div>
-      <p className="eyebrow">Seattle Python · 25 minutes</p>
       <h1>{title}<br /><em>{accent}</em></h1>
       <div className="title-description">
         <p>{description}</p>
