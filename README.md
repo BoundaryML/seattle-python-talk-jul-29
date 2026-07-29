@@ -1,6 +1,6 @@
 # FFIs but better: BAML Bridge
 
-An MDX slide deck for a 25-minute Seattle Python talk. Each authored section lives in its own file under `slides/`, and `02-talk-slide-by-slide.md` preserves the original working outline.
+An MDX slide deck for a 25-minute Seattle Python talk. It is configured as a local-only Next.js project. Each authored section lives in its own file under `slides/`, and `02-talk-slide-by-slide.md` preserves the original working outline.
 
 ## Run the deck
 
@@ -8,6 +8,8 @@ An MDX slide deck for a 25-minute Seattle Python talk. Each authored section liv
 npm install
 npm run dev
 ```
+
+Open [http://localhost:3000](http://localhost:3000).
 
 Use the left and right arrow keys to navigate. Press `O` for the slide overview, `N` for speaker notes, and `F` for fullscreen.
 

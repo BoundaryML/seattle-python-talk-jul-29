@@ -1,8 +1,8 @@
-import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+import { Notes, RuntimePathFooter, SlideFrame } from "@/components/deck/SlidePrimitives";
 
 export const meta = { title: "decode_call_result", eyebrow: "protobuf → Python", kind: "content", tone: "paper" };
 
-<SlideFrame title="decode_call_result" eyebrow="protobuf → Python">
+<SlideFrame title="decode_call_result" eyebrow="protobuf → Python" footer={<RuntimePathFooter active="python-out" />}>
   The outbound encoder places that string in the success arm of the top-level result envelope:
 
   ```textproto

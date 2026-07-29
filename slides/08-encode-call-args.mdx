@@ -1,8 +1,8 @@
-import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+import { Notes, RuntimePathFooter, SlideFrame } from "@/components/deck/SlidePrimitives";
 
 export const meta = { title: "encode_call_args", eyebrow: "Python → protobuf", kind: "content", tone: "paper" };
 
-<SlideFrame title="encode_call_args" eyebrow="Python → protobuf" dense>
+<SlideFrame title="encode_call_args" eyebrow="Python → protobuf" dense footer={<RuntimePathFooter active="inbound" />}>
   The `call_id` is illustrative. Callback kwargs are omitted so we can focus on ordinary serializable data.
 
   ```textproto

@@ -3,7 +3,9 @@ import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
 export const meta = { title: "One concrete respond call", eyebrow: "Follow one value", kind: "content", tone: "paper" };
 
 <SlideFrame title="One concrete respond call" eyebrow="Follow one value" dense>
-  Inside the Discord bot, one invocation might have these concrete Python values:
+  Given some BAML code:
+
+  **BAML**
 
   ```baml
   class DiscordMessage {
@@ -16,7 +18,9 @@ export const meta = { title: "One concrete respond call", eyebrow: "Follow one v
   }
   ```
 
-  `baml generate` turns `DiscordMessage` into a Pydantic model and gives `respond` a type-checked Python signature:
+  We can run `baml generate` to create Python bindings for both our BAML types *and* our BAML functions, which lets us call our BAML code in a type-safe way:
+
+  **Python**
 
   ```python
   response = baml_sdk.respond(

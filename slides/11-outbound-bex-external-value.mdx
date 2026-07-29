@@ -1,8 +1,8 @@
-import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+import { Notes, RuntimePathFooter, SlideFrame } from "@/components/deck/SlidePrimitives";
 
 export const meta = { title: "Outbound BexExternalValue", eyebrow: "VM value → protobuf", kind: "content", tone: "paper" };
 
-<SlideFrame title="Outbound BexExternalValue" eyebrow="VM value → protobuf">
+<SlideFrame title="Outbound BexExternalValue" eyebrow="VM value → protobuf" footer={<RuntimePathFooter active="outbound" />}>
   Suppose this run completes successfully:
 
   ```text

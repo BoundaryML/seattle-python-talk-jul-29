@@ -1,8 +1,8 @@
-import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+import { Notes, RuntimePathFooter, SlideFrame } from "@/components/deck/SlidePrimitives";
 
 export const meta = { title: "Inbound BexExternalValue", eyebrow: "protobuf → VM value", kind: "content", tone: "paper" };
 
-<SlideFrame title="Inbound BexExternalValue" eyebrow="protobuf → VM value" dense>
+<SlideFrame title="Inbound BexExternalValue" eyebrow="protobuf → VM value" dense footer={<RuntimePathFooter active="bex" />}>
   After protobuf decoding, `kwargs_to_bex_values` has a `HashMap<String, BexExternalValue>` conceptually equivalent to:
 
   ```rust

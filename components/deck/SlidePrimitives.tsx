@@ -7,14 +7,39 @@ export type SlideMeta = {
   tone?: "paper" | "ink" | "purple";
 };
 
-export function SlideFrame({ title, eyebrow, children, dense = false }: { title: string; eyebrow: string; children: ReactNode; dense?: boolean }) {
+export function SlideFrame({ title, eyebrow, children, dense = false, footer }: { title: string; eyebrow: string; children: ReactNode; dense?: boolean; footer?: ReactNode }) {
+  const className = ["slide-frame", dense ? "is-dense" : "", footer ? "has-footer" : ""].filter(Boolean).join(" ");
   return (
-    <div className={dense ? "slide-frame is-dense" : "slide-frame"}>
+    <div className={className}>
       <div className="slide-heading">
         <p className="eyebrow">{eyebrow}</p>
         <h1>{title}</h1>
       </div>
       <div className="mdx-body">{children}</div>
+      {footer && <div className="slide-frame-footer">{footer}</div>}
+    </div>
+  );
+}
+
+type RuntimeStage = "python-in" | "inbound" | "bex" | "outbound" | "python-out";
+
+export function RuntimePathFooter({ active }: { active: RuntimeStage }) {
+  const stages: Array<{ id: RuntimeStage; label: string }> = [
+    { id: "python-in", label: "Python" },
+    { id: "inbound", label: "baml_inbound.proto" },
+    { id: "bex", label: "BAML" },
+    { id: "outbound", label: "baml_outbound.proto" },
+    { id: "python-out", label: "Python" },
+  ];
+
+  return (
+    <div className="runtime-path" aria-label="Python to baml_inbound.proto to BAML to baml_outbound.proto to Python">
+      {stages.map((stage, index) => (
+        <span className="runtime-path-part" key={stage.id}>
+          <span className={stage.id === active ? "runtime-path-stage active" : "runtime-path-stage"}>{stage.label}</span>
+          {index < stages.length - 1 && <span className="runtime-path-arrow" aria-hidden="true">-&gt;</span>}
+        </span>
+      ))}
     </div>
   );
 }
@@ -77,7 +102,7 @@ export function RuntimeFlow() {
   return (
     <div className="runtime-flow" role="img" aria-label={steps.map(([label]) => label).join(" then ")}>
       {steps.map(([label, detail], index) => (
-        <div className="runtime-step-wrap" key={label}>
+        <div className="runtime-step-wrap" key={`${label}-${index}`}>
           <div className={index === 2 ? "runtime-step active" : "runtime-step"}><b>{label}</b><small>{detail}</small></div>
           {index < steps.length - 1 && <span aria-hidden="true">→</span>}
         </div>
@@ -106,22 +131,6 @@ export function HandleReveal() {
       <strong>42</strong>
       <span className="handle-arrow">→</span>
       <div><small>materializes in BAML</small><b>HostValueArc</b></div>
-    </div>
-  );
-}
-
-export function FeatureGrid() {
-  const groups = [
-    ["Functions", "free · instance · static"],
-    ["Execution", "sync · async · cancel"],
-    ["Environment", "errors · os.env · state"],
-    ["Return trip", "closures · files · sockets"],
-    ["Lifetimes", "captured local references"],
-    ["Types", "recover generic information"],
-  ];
-  return (
-    <div className="feature-grid">
-      {groups.map(([title, detail], index) => <div key={title}><span>{String(index + 1).padStart(2, "0")}</span><b>{title}</b><p>{detail}</p></div>)}
     </div>
   );
 }

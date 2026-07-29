@@ -1,0 +1,13 @@
+import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "We define rules for how to map items in BAML to Python", eyebrow: "Files + nominal types", kind: "content", tone: "paper" };
+
+<SlideFrame title="We define rules for how to map items in BAML to Python" eyebrow="Files + nominal types" dense>
+  - **Files:** BAML's namespacing rules mean that we collapse multiple BAML files into a single Python file.
+  - **Classes:** BAML `DiscordMessage` becomes Pydantic `DiscordMessage`.
+  - **Enums:** BAML `enum Color { Red, Green, Blue }` becomes a Python enum.
+</SlideFrame>
+
+<Notes>
+  Define deterministic mappings at each level. For a BAML file: namespacing means multiple BAML files collapse into one Python file. For a BAML class: `DiscordMessage` becomes a Pydantic `DiscordMessage`. For a BAML enum: `Color { Red, Green, Blue }` becomes a Python enum.
+</Notes>

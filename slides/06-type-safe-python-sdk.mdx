@@ -1,8 +1,8 @@
 import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
 
-export const meta = { title: "How do we do this?", eyebrow: "BAML signature → Python stub", kind: "content", tone: "paper" };
+export const meta = { title: "Type-safe Python SDK", eyebrow: "BAML signature → Python stub", kind: "content", tone: "paper" };
 
-<SlideFrame title="How do we do this?" eyebrow="BAML signature → Python stub" dense>
+<SlideFrame title="Type-safe Python SDK" eyebrow="BAML signature → Python stub" dense>
   <div className="signature-compare">
     <div>
       <span>BAML</span>
@@ -29,10 +29,8 @@ export const meta = { title: "How do we do this?", eyebrow: "BAML signature → 
       ```
     </div>
   </div>
-
-  <p className="lead">Every BAML type needs a corresponding Python type.</p>
 </SlideFrame>
 
 <Notes>
-  The outline leaves this as a revision point: “we need to make decisions about…” Use this slide to compare the source signature with the generated Python surface while that part of the talk is still taking shape.
+  Compare the source BAML signature with the generated Python stub. The next two slides explain the mapping rules that make this generated surface predictable.
 </Notes>

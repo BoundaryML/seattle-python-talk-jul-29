@@ -1,0 +1,24 @@
+import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "We're just scratching the surface…", eyebrow: "The rest of the bridge", kind: "content", tone: "paper" };
+
+<SlideFrame title="We're just scratching the surface…" eyebrow="The rest of the bridge" dense>
+  - What functions do you support across the boundary?
+    - Free functions
+    - Instance methods
+    - Static methods
+  - Supporting both synchronous and asynchronous function calls
+    - How do you cancel a function call?
+    - If you modify Python `os.env`, how do you observe those changes in BAML?
+    - If a BAML function throws an error, how does that error surface in Python? What's the API for handling that error?
+  - We now have a strategy for serializing Python values to BAML, but what about the other direction?
+    - How do we return a closure from BAML to Python?
+    - How do we represent a BAML file handle in Python?
+    - What about a BAML socket?
+  - What happens when a closure binds a reference to a local variable?
+  - BAML supports generics: how do you recover generic information at the Python ↔ BAML boundary?
+</SlideFrame>
+
+<Notes>
+  Functions: free functions, instance methods, static methods. Execution: sync and async, cancellation, observing Python `os.env`, surfacing BAML errors. The other direction: returning a closure from BAML to Python, representing BAML file handles and sockets. Lifetimes: closures binding local references. Generics: recovering generic information at the Python ↔ BAML boundary.
+</Notes>

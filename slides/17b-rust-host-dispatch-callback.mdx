@@ -1,0 +1,28 @@
+import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "Rust has a u64. Now what?", eyebrow: "Register the host dispatch callback", kind: "content", tone: "paper" };
+
+<SlideFrame title="Rust has a u64. Now what?" eyebrow="Register the host dispatch callback">
+  Register the callback when the bridge starts:
+
+  ```rust
+  bridge_cffi::register_host_dispatch_callback(
+      host_value::host_dispatch_callback,
+  );
+  ```
+
+  The C ABI callback receives the host-value key and serialized arguments:
+
+  ```rust
+  pub extern "C" fn host_dispatch_callback(
+      host_value_key: u64,
+      call_id: u32,
+      args: *const u8,
+      length: usize,
+  ) { ... }
+  ```
+</SlideFrame>
+
+<Notes>
+  Register `host_dispatch_callback` with the CFFI bridge. When BAML invokes the host closure, the bridge calls this C ABI function with the host-value key, call ID, and serialized arguments.
+</Notes>

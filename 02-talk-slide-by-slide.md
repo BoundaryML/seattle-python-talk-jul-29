@@ -86,7 +86,19 @@ def respond(message: DiscordMessage, delete_callback: typing.Callable[[], None],
         DevOther, InvalidArgument, Io, LlmClient, RenderPrompt, Timeout"""
 ```
 
-- we need to make decisions about what the python type for every corresponding baml type i
+# SLIDE: We define rules for how to map items in BAML to Python
+- for a given BAML file, what will the corresponding Python file be?
+	- BAML's namespacing rules mean that we collapse multiple BAML files into a single Python file
+- for a given BAML class definition, what will the corresponding Python class definition be?
+	- BAML `DiscordMessage` becomes Pydantic `DiscordMessage`
+- for a given BAML enum definition, what will the corresponding Python enum definition be?
+	- BAML `enum Color { Red, Green, Blue }` becomes Python enum
+
+# SLIDE: We define rules for how to map items in BAML to Python
+- for a given BAML type, what will the corresponding Python type be?
+	- BAML types should be relatively familiar to you: we have lists, maps, unions, generics, and closures.
+
+This can get really complicated: what is the Python type corresponding to `Box<SlackMessage | DiscordMessage>[] | map<string, EmailMessage | LinkedInDm | TwitterDm>`?
 
 ===============
 # SLIDE GROUP: Runtime
@@ -270,7 +282,7 @@ BexExternalValue::HostValue(
 
 This special handle does not use the ordinary CFFI handle table. `HostValueArc::intern` preserves identity for the key, and contextual conversion against `(string) -> null throws never` materializes a VM host closure.
 
-# OK, so the Rust code has a u64 - now what?
+# Slide: OK, so the Rust code has a u64 - now what?
 
 ```baml
 send_update("Reading baml_language/")
@@ -288,8 +300,22 @@ The integer is the only representation of the lambda that crosses the FFI bounda
 - what happens if a callback throws an exception?
 	- this is why the host table is a host _value_ table
 
+# Slide: OK, so the Rust code has a u64 - now what?
 
-# Slide: feature list
+```rust
+    bridge_cffi::register_host_dispatch_callback(host_value::host_dispatch_callback);
+```
+
+```rust
+pub extern "C" fn host_dispatch_callback(
+    host_value_key: u64,
+    call_id: u32,
+    args: *const u8,
+    length: usize,
+) { ... }
+```
+
+# Slide: We're just scratching the surface...
 - What functions do you support across the boundary?
 	- Free functions
 	- Instance methods
@@ -304,3 +330,7 @@ The integer is the only representation of the lambda that crosses the FFI bounda
 	- What about a BAML socket?
 - What happens when a closure binds a reference to a local variable?
 - BAML supports generics: how do you recover generic information at the Python<->BAML boundary?
+
+# Slide: try it out!
+
+boundaryml.com/quickstart

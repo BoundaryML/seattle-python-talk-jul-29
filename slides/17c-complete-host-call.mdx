@@ -1,0 +1,9 @@
+import { SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "Rust has a u64. Now what?", eyebrow: "Complete the host call", kind: "content", tone: "paper" };
+
+<SlideFrame title="Rust has a u64. Now what?" eyebrow="Complete the host call">
+  ```rust
+  complete_host_call(call_id, 0, bytes.as_ptr() as *const i8, bytes.len());
+  ```
+</SlideFrame>

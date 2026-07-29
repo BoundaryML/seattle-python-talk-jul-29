@@ -1,4 +1,4 @@
-import { Notes, RuntimeFlow, SlideFrame } from "@/components/deck/SlidePrimitives";
+import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
 
 export const meta = { title: "Rust has a u64. Now what?", eyebrow: "The host-call trampoline", kind: "content", tone: "paper" };
 
@@ -7,7 +7,7 @@ export const meta = { title: "Rust has a u64. Now what?", eyebrow: "The host-cal
   send_update("Reading baml_language/")
   ```
 
-  <RuntimeFlow />
+  BAML -&gt; baml_outbound.proto -&gt; Python -&gt; baml_inbound.proto -&gt; BAML
 
   <p>The VM sends key <code>42</code> and the serialized string through the host-call trampoline. Python retrieves and invokes the original lambda. Its return value crosses back through the same codecs in reverse.</p>
 </SlideFrame>
