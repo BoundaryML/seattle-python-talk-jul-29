@@ -3,16 +3,19 @@ import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
 export const meta = { title: "We define rules for how to map items in BAML to Python", eyebrow: "Composed types", kind: "content", tone: "paper" };
 
 <SlideFrame title="We define rules for how to map items in BAML to Python" eyebrow="Composed types" dense>
-  <div className="mapping-slide-content">
-    BAML type _expressions_ need their own translation logic too.
+  <div className="mapping-rules">
+    <section className="mapping-rule">
+      <h2>Type</h2>
+      <div>
+        <p>For a given BAML type expression, what will the corresponding Python type expression be?</p>
 
-    ```baml
-    function respond(
-      original: Box<SlackMessage | DiscordMessage>[] | map<string, EmailMessage | LinkedInDm | TwitterDm>
-    ) { ... }
-    ```
-
-    BAML types are the same as what you're used to: lists, maps, unions, etc.
+        ```baml
+        function respond(
+          original: Box<SlackMessage | DiscordMessage>[] | map<string, EmailMessage | LinkedInDm | TwitterDm>
+        ) { ... }
+        ```
+      </div>
+    </section>
   </div>
 </SlideFrame>
 

@@ -1,0 +1,54 @@
+import { Notes, RuntimePathFooter, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "baml_outbound.proto", eyebrow: "protobuf → Python", kind: "content", tone: "paper" };
+
+<SlideFrame title="baml_outbound.proto" eyebrow="protobuf → Python" dense footer={<RuntimePathFooter active="outbound" />}>
+  <div className="proto-compare">
+    <div>
+      <span>BamlOutboundValue schema</span>
+
+      ```protobuf
+      message BamlOutboundValue {
+        oneof value {
+          BamlValueNull null_value = 2;
+          string string_value = 3;
+          int64 int_value = 4;
+          double float_value = 5;
+          bool bool_value = 6;
+          BamlValueClass class_value = 7;
+          BamlValueEnum enum_value = 8;
+          BamlLiteralValue literal_value = 9;
+          BamlValueList list_value = 11;
+          BamlValueMap map_value = 12;
+          BamlValueUnionVariant union_variant_value = 13;
+          BamlOutboundHandle handle_value = 16;
+          BamlValueMedia media_value = 17;
+          BamlValuePromptAst prompt_ast_value = 18;
+          bytes uint8array_value = 19;
+          string bigint_value = 20;
+          BamlTy ty_value = 21;
+        }
+      }
+      ```
+    </div>
+    <div>
+      <span>BamlOutboundResult example</span>
+
+      The outbound encoder places that string in the success arm of the top-level result envelope:
+
+      ```textproto
+      BamlOutboundResult {
+        ok {
+          string_value: "Done! Slides have been attached to B-832"
+        }
+      }
+      ```
+
+      <div className="result-strip"><code>ok.string_value</code><span>→</span><b>Python str</b><span>→</span><code>response</code></div>
+    </div>
+  </div>
+</SlideFrame>
+
+<Notes>
+  The Python decoder reads `ok.string_value` and returns a Python `str`, which is the value assigned to `response`.
+</Notes>

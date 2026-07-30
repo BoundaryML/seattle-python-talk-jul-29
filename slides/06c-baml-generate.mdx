@@ -1,11 +1,11 @@
 import { Notes, SlideFrame } from "@/components/deck/SlidePrimitives";
 
-export const meta = { title: "Type-safe Python SDK", eyebrow: "BAML signature → Python stub", kind: "content", tone: "paper" };
+export const meta = { title: "baml generate", eyebrow: "BAML signature → Python stub", kind: "content", tone: "paper" };
 
-<SlideFrame title="Type-safe Python SDK" eyebrow="BAML signature → Python stub" dense>
+<SlideFrame title="baml generate" eyebrow="BAML signature → Python stub" dense>
   <div className="signature-compare">
     <div>
-      <span>BAML</span>
+      <span>main.baml</span>
 
       ```baml
       function respond(
@@ -16,7 +16,7 @@ export const meta = { title: "Type-safe Python SDK", eyebrow: "BAML signature �
       ```
     </div>
     <div>
-      <span>baml_sdk/__init__.pyi</span>
+      <span>{"baml_sdk/__init__.pyi"}</span>
 
       ```python
       def respond(
@@ -32,5 +32,5 @@ export const meta = { title: "Type-safe Python SDK", eyebrow: "BAML signature �
 </SlideFrame>
 
 <Notes>
-  Compare the source BAML signature with the generated Python stub. The next two slides explain the mapping rules that make this generated surface predictable.
+  Now that the mapping rules are defined, compare the source BAML signature with the Python stub produced by `baml generate`.
 </Notes>

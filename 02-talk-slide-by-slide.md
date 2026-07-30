@@ -16,9 +16,10 @@ Let's start with a demo!
 	- image inputs, image outputs
 	- callbacks
 
-# Everything is bits
+# Everything is bytes
 
 Python box (Python VM) talking to BAML box (Baml execution engine)
+Two arrows between the boxes: `bytes in →` and `← bytes out`
 Box enclosing everything above it labeled `python my_python_baml_app.py`
 
 ===============

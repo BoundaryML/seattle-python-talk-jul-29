@@ -1,0 +1,35 @@
+import { Notes, RuntimePathFooter, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "BAML interface", eyebrow: "Engine boundary", kind: "content", tone: "paper" };
+
+<SlideFrame title="BAML interface" eyebrow="Engine boundary" dense footer={<RuntimePathFooter active="bex" />}>
+  <div className="signature-compare">
+    <div>
+      ```rust
+      pub trait Bex: Send + Sync {
+          /// Execute a function by name. Returns a fully owned value (no Handle variants).
+          async fn call_function(
+              self: Arc<Self>,
+              function_name: &str,
+              args: BexArgs,
+              call_ctx: FunctionCallContext,
+          ) -> Result<BexExternalValue, RuntimeError>;
+      }
+      ```
+    </div>
+    <div>
+      ```rust
+      pub struct BexArgs {
+          /// Required values keyed by their type-level names and kept in declared order.
+          pub required: IndexMap<String, BexExternalValue>,
+          /// Supplied optional values keyed by their type-level parameter names.
+          pub optional: IndexMap<String, BexExternalValue>,
+      }
+      ```
+    </div>
+  </div>
+</SlideFrame>
+
+<Notes>
+  The bridge calls the BAML engine through the `Bex` interface. Arguments arrive as required and optional maps of `BexExternalValue`; the fully owned result leaves through the same external-value type.
+</Notes>

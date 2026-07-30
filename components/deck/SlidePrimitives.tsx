@@ -81,11 +81,14 @@ export function Notes({ children }: { children: ReactNode }) {
 
 export function BridgeDiagram() {
   return (
-    <div className="bridge-diagram" role="img" aria-label="Python VM talking to the BAML execution engine inside one Python process">
+    <div className="bridge-diagram" role="img" aria-label="Python VM sends bytes into BAML and receives bytes back from BAML inside one Python process">
       <div className="process-box">
         <span className="process-label">python my_python_baml_app.py</span>
         <div className="runtime-box"><b>Python VM</b><small>objects + callables</small></div>
-        <div className="wire"><i /><code>bits</code><i /></div>
+        <div className="wire">
+          <span><small>bytes in</small><b aria-hidden="true">→</b></span>
+          <span><b aria-hidden="true">←</b><small>bytes out</small></span>
+        </div>
         <div className="runtime-box purple-box"><b>BAML</b><small>execution engine</small></div>
       </div>
     </div>

@@ -1,0 +1,61 @@
+import { Notes, RuntimePathFooter, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "baml_inbound.proto", eyebrow: "Python → protobuf", kind: "content", tone: "paper" };
+
+<SlideFrame title="baml_inbound.proto" eyebrow="Python → protobuf" dense footer={<RuntimePathFooter active="inbound" />}>
+  <div className="proto-compare">
+    <div>
+      <span>InboundValue schema</span>
+
+      ```protobuf
+      message InboundValue {
+        BamlTy value_type = 1;
+        oneof value {
+          string string_value = 2;
+          int64 int_value = 3;
+          double float_value = 4;
+          bool bool_value = 5;
+          InboundListValue list_value = 6;
+          InboundMapValue map_value = 7;
+          InboundClassValue class_value = 8;
+          InboundEnumValue enum_value = 9;
+          BamlHandle handle = 10;
+          bytes uint8array_value = 11;
+          string bigint_value = 12;
+          BamlTy ty_value = 13;
+        }
+      }
+      ```
+    </div>
+    <div>
+      <span>CallFunctionArgs example</span>
+
+      ```textproto
+      CallFunctionArgs {
+        call_id: 9001
+        function_name: "user.respond"
+        kwargs {
+          string_key: "message"
+          value {
+            value_type { class_ty { name: "user.DiscordMessage" } }
+            class_value {
+              fields {
+                string_key: "from_user"
+                value { string_value: "sam" }
+              }
+              fields {
+                string_key: "content"
+                value { string_value: "@bamlbot prepare the FFI talk slides." }
+              }
+            }
+          }
+        }
+      }
+      ```
+    </div>
+  </div>
+</SlideFrame>
+
+<Notes>
+  `respond` is not generic, so `type_args` is empty. The Pydantic model becomes a `class_value`: fields serialize recursively as strings, while `value_type.class_ty` preserves nominal `user.DiscordMessage` identity.
+</Notes>

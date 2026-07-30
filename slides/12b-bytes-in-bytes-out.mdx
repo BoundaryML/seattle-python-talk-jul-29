@@ -1,0 +1,25 @@
+import { Notes, RuntimePathFooter, SlideFrame } from "@/components/deck/SlidePrimitives";
+
+export const meta = { title: "Bytes in, bytes out", eyebrow: "Generated Python", kind: "content", tone: "paper" };
+
+<SlideFrame title="Bytes in, bytes out" eyebrow="Generated Python" footer={<RuntimePathFooter active="python-out" />}>
+  ```python
+  def _sync(*args: Any, **kwargs: Any) -> Any:
+      merged = _build_kwargs(args, kwargs, required_names, optional_names)
+      type_args = <snip>
+      rt = get_runtime()
+      call_id = new_function_call()
+      args_proto = encode_call_args(
+          merged,
+          call_id,
+          type_args,
+          function_name=baml_fqn,
+      )
+      result_bytes = rt.call_function_sync(args_proto)
+      return decode_call_result(result_bytes)
+  ```
+</SlideFrame>
+
+<Notes>
+  Return to the generated wrapper after following the full round trip. The bytes have come back out of the runtime, and the final Python value is now highlighted.
+</Notes>

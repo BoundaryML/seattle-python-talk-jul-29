@@ -6,14 +6,17 @@ import python from "highlight.js/lib/languages/python";
 import rust from "highlight.js/lib/languages/rust";
 import baml from "../lib/syntax/baml.js";
 
-test("the outline is split into 24 MDX slides", async () => {
+test("the deck uses 26 MDX sources for 27 slides", async () => {
   const files = (await readdir(new URL("../slides/", import.meta.url))).filter((file) => file.endsWith(".mdx"));
-  assert.equal(files.length, 24);
+  assert.equal(files.length, 26);
 
   const registry = await readFile(new URL("../slides/index.ts", import.meta.url), "utf8");
   for (const file of files) {
     assert.match(registry, new RegExp(file.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
+  const slideEntries = registry.slice(registry.indexOf("export const slides"));
+  assert.equal((slideEntries.match(/\{ component:/g) ?? []).length, 27);
+  assert.equal((slideEntries.match(/component: BamlGenerate/g) ?? []).length, 2);
 });
 
 test("BAML, Python, and Rust grammars produce highlighted tokens", () => {

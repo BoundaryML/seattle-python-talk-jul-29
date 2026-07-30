@@ -28,5 +28,6 @@ const withMDX = createMDX({
 });
 
 export default withMDX({
+  devIndicators: false,
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 });
